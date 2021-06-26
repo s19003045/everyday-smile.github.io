@@ -14,21 +14,46 @@
                 <div class="eye"></div>
             </div>
         </div>
+
         <script>
-            document
-                .querySelector("body")
-                .addEventListener("mousemove", eyeball);
+            // bind elements
+            const body = document.querySelector("body");
+            var eyes = document.querySelectorAll(".eye");
+            // mouse event
+            body.addEventListener("mousemove", eyeball);
+            body.ontouchend = (e) => {
+                e.preventDefault();
+            };
+
+            // touch event
+            body.addEventListener("touchstart", handleTouchStart);
+            body.addEventListener("touchend", handleTouchEnd);
+            body.addEventListener("touchcancel", handleTouchCancel);
+            body.addEventListener("touchmove", handleTouchMove);
 
             function eyeball(event) {
-                var eyes = document.querySelectorAll(".eye");
-                eyes.forEach(function (eye) {
+                moveEyes(eyes, event.pageX, event.pageY);
+            }
+            function handleTouchStart(evt) {}
+            function handleTouchEnd(evt) {}
+            function handleTouchCancel(evt) {}
+
+            // touchMove handler
+            function handleTouchMove(evt) {
+                const touches = evt.changedTouches;
+
+                moveEyes(eyes, touches[0].pageX, touches[0].pageY);
+            }
+
+            function moveEyes(elements, pageX, pageY) {
+                elements.forEach(function (eye) {
                     let x =
                         eye.getBoundingClientRect().left + eye.clientWidth / 2;
 
                     let y =
                         eye.getBoundingClientRect().top + eye.clientHeight / 2;
 
-                    let radian = Math.atan2(event.pageX - x, event.pageY - y);
+                    let radian = Math.atan2(pageX - x, pageY - y);
 
                     let rot = radian * (180 / Math.PI) * -1 + 0;
 

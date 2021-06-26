@@ -4,12 +4,29 @@
     box-sizing: border-box;
 }
 
+html {
+    height: -webkit-fill-available;
+    height: -ms-fill-available;
+    height: -moz-fill-available;
+    height: -o-fill-available;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     background-color: #5d3800;
+    min-height: 100vh;
+    height: 100vh;
+    height: -webkit-fill-available;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .face {
@@ -72,3 +89,13 @@ body {
     background-color: #000;
     transition: 0.5s;
 }
+
+/* .container {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+} */
